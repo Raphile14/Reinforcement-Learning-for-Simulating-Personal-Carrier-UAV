@@ -84,15 +84,7 @@ public class UAVAgent : Agent
         {
             EndEpisode();
         }
-    }
-
-    // Allow control from developer
-    //public override void Heuristic(float[] actionsOut)
-    //{
-    //    base.Heuristic(actionsOut);
-    //    actionsOut[0] = Input.GetAxis("Vertical");
-    //    actionsOut[1] = Input.GetAxis("Horizontal");
-    //}
+    } 
 
     // Helper Functions
     public void RelocateMoveTarget()
