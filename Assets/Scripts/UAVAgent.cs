@@ -11,6 +11,7 @@ public class UAVAgent : Agent
     public Transform target;
     public Transform moveTarget;
     public float speed = 10;
+    public UserScript userScript;
 
     private void Start()
     {
@@ -27,7 +28,8 @@ public class UAVAgent : Agent
         this.transform.localPosition = new Vector3(0, 5, 0);
 
         // Reset Environment
-        RelocateMoveTarget();
+        userScript.RelocateMoveTarget();
+        userScript.ResetUser();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -69,26 +71,32 @@ public class UAVAgent : Agent
         // Apply Force
         rBody.AddForce(controlSignal * speed);
 
-        // TODO: Modify to follow user
-        float distanceToUser = Vector3.Distance(this.transform.localPosition, moveTarget.localPosition);
-        // Reached Target
-        if (distanceToUser < 1.42f)
-        {
-            SetReward(1.0f);
-            EndEpisode();
+        // Follow user
+        float distanceToUser = Vector3.Distance(this.transform.localPosition, target.localPosition);
+        // Near Target
+        if (distanceToUser < 3f)
+        {            
+            AddReward(0.1f);            
         }
 
         // Fell to the Ground or too low
-        // TODO: Add collision
-        if (this.transform.localPosition.y < 3)
+        // Out of bounds Y Axis
+        if (this.transform.localPosition.y > 7f || this.transform.localPosition.y < 3f)
+        {
+            EndEpisode();
+        }
+
+        // Out of bounds X Axis
+        if (this.transform.localPosition.x > 49f || this.transform.localPosition.x < -49f)
+        {
+            EndEpisode();
+        }
+
+        // Out of bounds Z Axis
+        if (this.transform.localPosition.z > 49f || this.transform.localPosition.z < -49f)
         {
             EndEpisode();
         }
     } 
-
-    // Helper Functions
-    public void RelocateMoveTarget()
-    {
-        moveTarget.localPosition = new Vector3(Random.Range(-49.0f, 49.0f), 0.5f, Random.Range(-49.0f, 49.0f));
-    }
+    
 }

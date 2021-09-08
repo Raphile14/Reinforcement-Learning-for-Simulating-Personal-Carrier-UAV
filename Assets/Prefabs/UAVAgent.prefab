@@ -552,15 +552,21 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 9
     NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 020000000300000002000000
     VectorActionSize: 020000000300000002000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: UAVAgent
   TeamId: 0
   m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!114 &8042122910265579896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,10 +582,11 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 3000
   target: {fileID: 8811389368965197597}
   moveTarget: {fileID: 1504541138908349679}
   speed: 10
+  userScript: {fileID: 188206887}
 --- !u!114 &1744765863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +604,8 @@ MonoBehaviour:
   m_Width: 84
   m_Height: 84
   m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &7024173136461737546
 MonoBehaviour:
@@ -615,6 +624,8 @@ MonoBehaviour:
   m_Width: 84
   m_Height: 84
   m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &5300690935964695007
 MonoBehaviour:
@@ -633,6 +644,8 @@ MonoBehaviour:
   m_Width: 84
   m_Height: 84
   m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &5926798108317786685
 MonoBehaviour:
@@ -651,6 +664,8 @@ MonoBehaviour:
   m_Width: 84
   m_Height: 84
   m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &7653676934386077190
 MonoBehaviour:
@@ -669,6 +684,8 @@ MonoBehaviour:
   m_Width: 84
   m_Height: 84
   m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &2343785981160631817
 MonoBehaviour:
@@ -687,6 +704,8 @@ MonoBehaviour:
   m_Width: 84
   m_Height: 84
   m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 1
   m_Compression: 1
 --- !u!114 &1768125828792505650
 MonoBehaviour:
@@ -713,7 +732,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -929,6 +948,7 @@ GameObject:
   - component: {fileID: 4536496805056181279}
   - component: {fileID: 3953674389431643689}
   - component: {fileID: 8913572770857057744}
+  - component: {fileID: 188206887}
   m_Layer: 0
   m_Name: User
   m_TagString: Untagged
@@ -1014,6 +1034,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &188206887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551565951220240871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93be1aab2786ea249bac84c1c17bf13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTarget: {fileID: 1504541138908349679}
+  speed: 10
 --- !u!1 &5255687642715886119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5891828930561531140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.284611, y: 4.281064, z: -5.3341274}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1885718133}
