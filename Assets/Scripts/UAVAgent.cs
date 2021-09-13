@@ -12,10 +12,13 @@ public class UAVAgent : Agent
     public Transform moveTarget;
     public float speed = 10;
     public UserScript userScript;
+    public MeshGenerator meshGenerator;
+    public GameObject groundMarker;
 
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
+        groundMarker.SetActive(false);
     }
 
     public override void OnEpisodeBegin()
@@ -27,9 +30,13 @@ public class UAVAgent : Agent
         this.rBody.velocity = Vector3.zero;
         this.transform.localPosition = new Vector3(0, 5, 0);
 
-        // Reset Environment
+        // Reset User
         userScript.RelocateMoveTarget();
         userScript.ResetUser();
+
+        // Reset Terrain
+        meshGenerator.CreateShape();
+        meshGenerator.UpdateMesh();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -41,6 +48,12 @@ public class UAVAgent : Agent
         sensor.AddObservation(target.localPosition);
         sensor.AddObservation(this.transform.localPosition);
         sensor.AddObservation(rBody.velocity);
+    }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        // base.Heuristic(actionsOut);
+        Debug.Log("test");
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -97,6 +110,5 @@ public class UAVAgent : Agent
         {
             EndEpisode();
         }
-    } 
-    
+    }     
 }
