@@ -10,11 +10,11 @@ public class UAVAgent : Agent
     Rigidbody rBody;
     public Transform target;
     public Transform moveTarget;
-    public float speed = 10;
+    public float speed = 5;
     public UserScript userScript;
     public MeshGenerator meshGenerator;
     public GameObject groundMarker;
-    public bool ongoing = false;
+    public bool ongoing = false;    
 
     private void Start()
     {

@@ -154,6 +154,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 509672482}
+    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: rotationSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149309718738, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
       propertyPath: m_Name
       value: ybot Model
@@ -210,6 +222,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bee24a7818fdfc84ca04eca493cf25b7, type: 2}
+    - target: {fileID: 8042122910265579896, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: MaxStep
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042122910265579896, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 509672482}
     m_RemovedComponents:
     - {fileID: 6864581064775090861, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
