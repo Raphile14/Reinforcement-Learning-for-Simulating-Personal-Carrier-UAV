@@ -14,6 +14,7 @@ public class UAVAgent : Agent
     public UserScript userScript;
     public MeshGenerator meshGenerator;
     public GameObject groundMarker;
+    public bool ongoing = false;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class UAVAgent : Agent
         this.rBody.angularVelocity = Vector3.zero;
         this.rBody.velocity = Vector3.zero;
         this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         // Reset User
         userScript.RelocateMoveTarget();
@@ -37,6 +39,9 @@ public class UAVAgent : Agent
         // Reset Terrain
         meshGenerator.CreateShape();
         meshGenerator.UpdateMesh();
+
+        // Set Status to true
+        ongoing = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -53,7 +58,7 @@ public class UAVAgent : Agent
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         // base.Heuristic(actionsOut);
-        Debug.Log("test");
+        // Debug.Log("test");
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -91,25 +96,21 @@ public class UAVAgent : Agent
         {            
             AddReward(0.1f);            
         }
-
-        // Fell to the Ground or too low
-        // Out of bounds Y Axis
-        if (this.transform.localPosition.y < 3f)
-        // if (this.transform.localPosition.y > 7f || this.transform.localPosition.y < 3f)
+        // Penalty if not in radius
+        else
         {
-            EndEpisode();
-        }
+            AddReward(-0.01f);
+        }     
+    }
 
-        // Out of bounds X Axis
-        if (this.transform.localPosition.x > 49f || this.transform.localPosition.x < -49f)
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Collided with something
+        if (ongoing)
         {
-            EndEpisode();
+            AddReward(-10);
+            ongoing = false;
+            EndEpisode();            
         }
-
-        // Out of bounds Z Axis
-        if (this.transform.localPosition.z > 49f || this.transform.localPosition.z < -49f)
-        {
-            EndEpisode();
-        }
-    }     
+    }
 }
