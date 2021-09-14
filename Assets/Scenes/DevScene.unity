@@ -130,14 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936138480, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5891828930561531140, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
       propertyPath: m_Name
       value: UAVAgent
