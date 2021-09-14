@@ -8,13 +8,15 @@ public class MeshGenerator : MonoBehaviour
     Mesh mesh;
     Vector3[] vertices;
     int[] triangles;
+    MeshCollider meshCollider;
     public int xSize = 100;
     public int zSize = 100;
 
     void Start()
     {
         mesh = new Mesh();
-        GetComponent<MeshFilter>().mesh = mesh;        
+        GetComponent<MeshFilter>().mesh = mesh;
+        meshCollider = GetComponent<MeshCollider>();
     }
 
     public void CreateShape()
@@ -58,6 +60,7 @@ public class MeshGenerator : MonoBehaviour
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        meshCollider.sharedMesh = mesh;
 
         mesh.RecalculateNormals();
     }

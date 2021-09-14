@@ -28,7 +28,7 @@ public class UAVAgent : Agent
         // Reset Agent
         this.rBody.angularVelocity = Vector3.zero;
         this.rBody.velocity = Vector3.zero;
-        this.transform.localPosition = new Vector3(0, 5, 0);
+        this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);
 
         // Reset User
         userScript.RelocateMoveTarget();
@@ -94,7 +94,8 @@ public class UAVAgent : Agent
 
         // Fell to the Ground or too low
         // Out of bounds Y Axis
-        if (this.transform.localPosition.y > 7f || this.transform.localPosition.y < 3f)
+        if (this.transform.localPosition.y < 3f)
+        // if (this.transform.localPosition.y > 7f || this.transform.localPosition.y < 3f)
         {
             EndEpisode();
         }
