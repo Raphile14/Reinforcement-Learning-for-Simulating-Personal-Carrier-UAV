@@ -123,30 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &509672480 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149309718738, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-  m_PrefabInstance: {fileID: 716241981}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &509672482
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509672480}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bee24a7818fdfc84ca04eca493cf25b7, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &716241981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,22 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 509672482}
-    - target: {fileID: 188206887, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: rotationSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149309718738, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: m_Name
-      value: ybot Model
-      objectReference: {fileID: 0}
     - target: {fileID: 5891828930561531140, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
       propertyPath: m_Name
       value: UAVAgent
@@ -218,20 +178,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6864581064775090861, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: bee24a7818fdfc84ca04eca493cf25b7, type: 2}
-    - target: {fileID: 8042122910265579896, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: MaxStep
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 8042122910265579896, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 509672482}
-    m_RemovedComponents:
-    - {fileID: 6864581064775090861, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
 --- !u!1 &977797796
 GameObject:

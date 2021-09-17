@@ -1117,7 +1117,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 3000
+  MaxStep: 1500
   target: {fileID: 8811389368965197597}
   moveTarget: {fileID: 1504541138908349679}
   speed: 10
@@ -1573,6 +1573,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &509672482
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149309718738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bee24a7818fdfc84ca04eca493cf25b7, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3551565951220240871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,7 +1604,6 @@ GameObject:
   - component: {fileID: 188206887}
   - component: {fileID: 1936138480}
   - component: {fileID: 1936138481}
-  - component: {fileID: 6864581064775090861}
   m_Layer: 0
   m_Name: User
   m_TagString: Untagged
@@ -1621,7 +1639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTarget: {fileID: 1504541138908349679}
-  speed: 5
+  speed: 2
+  rotationSpeed: 0.5
+  animator: {fileID: 509672482}
 --- !u!54 &1936138480
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1652,25 +1672,6 @@ CapsuleCollider:
   m_Height: 1.85
   m_Direction: 1
   m_Center: {x: 0, y: -0.115, z: 0}
---- !u!95 &6864581064775090861
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3551565951220240871}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5255687642715886119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,12 +1950,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7da03f09ddf7678459c1a87563af221d, type: 3}
       propertyPath: m_Name
-      value: ybot@Idle
+      value: ybot Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da03f09ddf7678459c1a87563af221d, type: 3}
 --- !u!4 &543450653579483752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7da03f09ddf7678459c1a87563af221d, type: 3}
+  m_PrefabInstance: {fileID: 154303875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &919132149309718738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7da03f09ddf7678459c1a87563af221d, type: 3}
   m_PrefabInstance: {fileID: 154303875}
   m_PrefabAsset: {fileID: 0}
