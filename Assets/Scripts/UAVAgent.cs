@@ -30,15 +30,16 @@ public class UAVAgent : Agent
         this.rBody.angularVelocity = Vector3.zero;
         this.rBody.velocity = Vector3.zero;
         this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);
-        this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);        
 
-        // Reset User
-        userScript.RelocateMoveTarget();
-        userScript.ResetUser();
-
-        // Reset Terrain
+        // Reset Terrain and NavMesh
         meshGenerator.CreateShape();
         meshGenerator.UpdateMesh();
+        meshGenerator.UpdateNavMesh();
+
+        // Reset User
+        userScript.ResetUser();
+        userScript.RelocateMoveTarget();                
 
         // Set Status to true
         ongoing = true;
@@ -100,7 +101,21 @@ public class UAVAgent : Agent
         else
         {
             AddReward(-0.01f);
-        }     
+        }  
+        
+        // If UAV Clipped very far down
+        if (this.transform.localPosition.y < -10f)
+        {
+            AddReward(-10);
+            EndEpisode();
+        }
+
+        // Move target and human target
+        float distance = target.position.x - moveTarget.position.x;
+        if (distance < 1f && distance > -1f)
+        {
+            EndEpisode();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UserScript : MonoBehaviour
 {
     public Transform moveTarget;
-    public float speed = 2;
+    public Transform spawnTarget;
     new Rigidbody rigidbody;
-    public float rotationSpeed = 1f;
+    NavMeshAgent agent;
+    int layerMask;
 
     // Animation
     public Animator animator;
@@ -15,16 +17,12 @@ public class UserScript : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
+        layerMask = LayerMask.GetMask("GroundMesh");
     }
     
     void FixedUpdate()
     {
-        Vector3 moveTargetDirection = moveTarget.position;
-        moveTargetDirection.y = this.transform.position.y;
-        Vector3 direction = (moveTargetDirection - this.transform.position).normalized;
-        Quaternion lookDirection = Quaternion.LookRotation(direction);
-        rigidbody.MovePosition(this.transform.position + direction * speed * Time.deltaTime);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, lookDirection, Time.deltaTime * rotationSpeed);
 
         // Animation
         Vector3 velocity = rigidbody.velocity;
@@ -37,23 +35,35 @@ public class UserScript : MonoBehaviour
         else
         {
             animator.SetBool("isWalking", false);
-        }
-
-        float distance = this.transform.position.x - moveTarget.position.x;
-        if (distance < 0.5f && distance > -0.5f)
-        {
-            RelocateMoveTarget();
-        }
+        }        
     }
 
     // Helper Functions
     public void RelocateMoveTarget()
     {
-        moveTarget.localPosition = new Vector3(Random.Range(-49.0f, 49.0f), 10f, Random.Range(-49.0f, 49.0f));
+        moveTarget.localPosition = new Vector3(Random.Range(40.0f, 49.0f) * (Random.Range(0, 2) * 2 - 1), 10f, Random.Range(40.0f, 49.0f) * (Random.Range(0, 2) * 2 - 1));
+
+        RaycastHit hit;
+        if (Physics.Raycast(moveTarget.localPosition, moveTarget.TransformDirection(Vector3.down), out hit, 20f, layerMask))
+        {
+            agent.SetDestination(hit.point);
+            // Debug.Log("original hit: " + hit.point);
+        }
+        else
+        {
+            // Debug.Log("Did Not Hit. Relocating... ");
+            RelocateMoveTarget();
+        }
+        
     }
 
     public void ResetUser()
     {
-        this.transform.localPosition = new Vector3(0, 5, 0);
+        agent.enabled = false;
+        RaycastHit hit;
+        Physics.Raycast(spawnTarget.localPosition, spawnTarget.TransformDirection(Vector3.down), out hit, 20f, layerMask);
+        this.transform.position = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
+        // Debug.Log("reset location: " + this.transform.position);
+        agent.enabled = true;
     }
 }

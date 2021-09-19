@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGenerator : MonoBehaviour
 {
+    NavMeshSurface surface;
     Mesh mesh;
     Vector3[] vertices;
     int[] triangles;
@@ -17,6 +20,7 @@ public class MeshGenerator : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         meshCollider = GetComponent<MeshCollider>();
+        surface = GetComponent<NavMeshSurface>();
     }
 
     public void CreateShape()
@@ -63,5 +67,10 @@ public class MeshGenerator : MonoBehaviour
         meshCollider.sharedMesh = mesh;
 
         mesh.RecalculateNormals();
+    }
+
+    public void UpdateNavMesh()
+    {
+        surface.BuildNavMesh();
     }
 }
