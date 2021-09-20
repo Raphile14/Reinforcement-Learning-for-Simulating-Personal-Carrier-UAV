@@ -15,11 +15,12 @@ public class MeshGenerator : MonoBehaviour
     public GameObject treeContainer;
     public GameObject[] treePrefabs;
     GameObject[] treeObjects;
-    public int maxTrees = 20;
-    public int minTrees = 10;
+    public int maxTrees = 30;
+    public int minTrees = 20;
     int countTrees = 0;
     public int xSize = 100;
     public int zSize = 100;
+    int layerMask;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class MeshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         meshCollider = GetComponent<MeshCollider>();
         surface = GetComponent<NavMeshSurface>();
+        layerMask = LayerMask.GetMask("GroundMesh");
     }
 
     public void CreateShape()
@@ -83,6 +85,9 @@ public class MeshGenerator : MonoBehaviour
     public void GenerateTrees()
     {
         countTrees = Random.Range(minTrees, maxTrees);
+        float maxX = mesh.bounds.extents.x;
+        float maxY = mesh.bounds.extents.y;        
+        float maxZ = mesh.bounds.extents.z;
 
         // Delete Current Trees
         if (treeObjects != null)
@@ -97,17 +102,26 @@ public class MeshGenerator : MonoBehaviour
         treeObjects = new GameObject[countTrees];
         for (int i = 0; i < countTrees; i++)
         {
-            Vector3 spawnArea = CheckArea();
+            Vector3 spawnArea = CheckArea(maxX, maxY, maxZ);
             treeObjects[i] = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length - 1)], treeContainer.transform);
-        }
-
-        // Randomize Locations
+            treeObjects[i].transform.localPosition = spawnArea;
+            treeObjects[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 180), 0);
+        }        
     }
 
+    // Randomize Locations
     // Check area if tree is already there
-    public Vector3 CheckArea()
+    public Vector3 CheckArea(float maxX, float maxY, float maxZ)
     {
-        // RECURSSION
-        return new Vector3(0, 0, 0);
+        float xCoord = Random.Range(-maxX, maxX);
+        float zCoord = Random.Range(-maxZ, maxZ);
+
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(xCoord, maxY, zCoord), Vector3.down, out hit, 20f, layerMask))
+        {
+            return hit.point;
+        } 
+        return CheckArea(maxX, maxY, maxZ);
+        
     }
 }

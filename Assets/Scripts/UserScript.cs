@@ -51,7 +51,7 @@ public class UserScript : MonoBehaviour
         }
         else
         {
-            // Debug.Log("Did Not Hit. Relocating... ");
+            Debug.Log("Did Not Hit. Relocating... ");
             RelocateMoveTarget();
         }
         
@@ -62,7 +62,7 @@ public class UserScript : MonoBehaviour
         agent.enabled = false;
         RaycastHit hit;
         Physics.Raycast(spawnTarget.localPosition, spawnTarget.TransformDirection(Vector3.down), out hit, 20f, layerMask);
-        this.transform.position = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
+        this.transform.localPosition = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
         // Debug.Log("reset location: " + this.transform.position);
         agent.enabled = true;
     }

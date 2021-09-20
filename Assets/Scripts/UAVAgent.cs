@@ -38,7 +38,7 @@ public class UAVAgent : Agent
 
         // Reset User
         userScript.ResetUser();
-        userScript.RelocateMoveTarget();
+        userScript.RelocateMoveTarget();               
 
         // Reset Agent Location
         this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);

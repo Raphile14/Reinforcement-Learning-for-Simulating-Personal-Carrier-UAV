@@ -265,14 +265,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeContainer: {fileID: 1278411195}
   treePrefabs:
-  - {fileID: 143020, guid: aee731a00031fcc4d9d2b075e528e050, type: 3}
-  - {fileID: 160606, guid: 5c3cbac9d5eae3844a928d36e6dbd1a6, type: 3}
-  - {fileID: 142018, guid: d537224908c5f444f86c9e57e0c7234c, type: 3}
-  - {fileID: 138344, guid: 8a7cf5ac7b4145441a3dca86f869b09e, type: 3}
-  - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
-  - {fileID: 151190, guid: a9cc5585b9634a9449920c03ec6bc243, type: 3}
-  maxTrees: 20
-  minTrees: 10
+  - {fileID: 151190, guid: 35a2cb52171eab24c9dd2a9f2a8a70dc, type: 3}
+  - {fileID: 117604, guid: 974c1a3cf1056a14bb7fdfaa2613507e, type: 3}
+  - {fileID: 138344, guid: 0d745d5bc3dad444aae5e68f12e2fa32, type: 3}
+  - {fileID: 142018, guid: a002c40666ab06b449085aad7067c961, type: 3}
+  - {fileID: 160606, guid: 22de5cc7e717502488ae350018a59e41, type: 3}
+  - {fileID: 143020, guid: c3fa3bdc3cdeab8428b7cf1251eb2260, type: 3}
+  maxTrees: 30
+  minTrees: 20
   xSize: 100
   zSize: 100
 --- !u!64 &5403469104766225509
