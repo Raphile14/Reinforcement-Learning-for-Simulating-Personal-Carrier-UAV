@@ -114,6 +114,7 @@ public class UAVAgent : Agent
         }
 
         // Move target and human target
+        // End episode if human is near target
         float distance = target.position.x - moveTarget.position.x;
         if (distance < 1f && distance > -1f)
         {
