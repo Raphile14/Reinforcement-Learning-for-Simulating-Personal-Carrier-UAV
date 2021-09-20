@@ -26,11 +26,9 @@ public class UAVAgent : Agent
     {
         base.OnEpisodeBegin();
 
-        // Reset Agent
+        // Reset Agent rigidbody
         this.rBody.angularVelocity = Vector3.zero;
-        this.rBody.velocity = Vector3.zero;
-        this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);
-        this.transform.rotation = Quaternion.Euler(0, 0, 0);        
+        this.rBody.velocity = Vector3.zero;        
 
         // Reset Terrain and NavMesh
         meshGenerator.CreateShape();
@@ -39,7 +37,11 @@ public class UAVAgent : Agent
 
         // Reset User
         userScript.ResetUser();
-        userScript.RelocateMoveTarget();                
+        userScript.RelocateMoveTarget();
+
+        // Reset Agent Location
+        this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         // Set Status to true
         ongoing = true;
