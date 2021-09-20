@@ -30,9 +30,10 @@ public class UAVAgent : Agent
         this.rBody.angularVelocity = Vector3.zero;
         this.rBody.velocity = Vector3.zero;        
 
-        // Reset Terrain and NavMesh
+        // Reset Terrain, Trees, and NavMesh
         meshGenerator.CreateShape();
         meshGenerator.UpdateMesh();
+        meshGenerator.GenerateTrees();
         meshGenerator.UpdateNavMesh();
 
         // Reset User

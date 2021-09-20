@@ -12,6 +12,12 @@ public class MeshGenerator : MonoBehaviour
     Vector3[] vertices;
     int[] triangles;
     MeshCollider meshCollider;
+    public GameObject treeContainer;
+    public GameObject[] treePrefabs;
+    GameObject[] treeObjects;
+    public int maxTrees = 20;
+    public int minTrees = 10;
+    int countTrees = 0;
     public int xSize = 100;
     public int zSize = 100;
 
@@ -72,5 +78,36 @@ public class MeshGenerator : MonoBehaviour
     public void UpdateNavMesh()
     {
         surface.BuildNavMesh();
+    }
+
+    public void GenerateTrees()
+    {
+        countTrees = Random.Range(minTrees, maxTrees);
+
+        // Delete Current Trees
+        if (treeObjects != null)
+        {
+            for (int i = 0; i < treeObjects.Length; i++)
+            {
+                Destroy(treeObjects[i]);
+            }
+        }
+
+        // Create Trees
+        treeObjects = new GameObject[countTrees];
+        for (int i = 0; i < countTrees; i++)
+        {
+            Vector3 spawnArea = CheckArea();
+            treeObjects[i] = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length - 1)], treeContainer.transform);
+        }
+
+        // Randomize Locations
+    }
+
+    // Check area if tree is already there
+    public Vector3 CheckArea()
+    {
+        // RECURSSION
+        return new Vector3(0, 0, 0);
     }
 }
