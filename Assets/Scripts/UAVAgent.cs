@@ -11,6 +11,7 @@ public class UAVAgent : Agent
     public Transform target;
     public Transform moveTarget;
     public float speed = 5;
+    public float rotationSpeed = 0.5f;
     public UserScript userScript;
     public MeshGenerator meshGenerator;
     public GameObject groundMarker;
@@ -69,29 +70,59 @@ public class UAVAgent : Agent
     {
         base.OnActionReceived(actions);
 
-        // Branches 3
         Vector3 controlSignal = Vector3.zero;
 
-        // Branch0 = dont move, or move forward
-        controlSignal.x = actions.DiscreteActions[0];
+        // ================ FORWARD MOVEMENT ================
+        // Branch0 (2) = dont move, or move forward
+        // controlSignal.x = actions.DiscreteActions[0];
+        if (actions.DiscreteActions[0] == 1)
+        {
+            controlSignal += this.transform.forward;
+        }
 
-        // Branch1 = 0 = Look straight, 1 = left, 2 = right
+        // ================ UP/DOWN MOVEMENT ================
+        // Branch1 (2) = 0 = don't fly, 1 = fly
+        // controlSignal.y = actions.DiscreteActions[2];
+        if (actions.DiscreteActions[1] == 1)
+        {
+            controlSignal += this.transform.up;
+        }
+
+        // ================ ROLL ROTATION ================
+        // Branch2 = 0 = Dont Roll, 1 = left, 2 = right
+        // Turn Left (-1) or Look straight        
+        float roll = -actions.DiscreteActions[2] * rotationSpeed;
         // Turn Right
-        if (actions.DiscreteActions[1] == 2)
+        if (actions.DiscreteActions[2] == 2)
         {
-            controlSignal.z = 1;
-        }
-        // Turn Left (-1) or Look straight
-        else
-        {
-            controlSignal.z = -actions.DiscreteActions[1];
+            roll = 1 * rotationSpeed;
         }
 
-        // Branch3 = 0 = don't fly, 1 = fly
-        controlSignal.y = actions.DiscreteActions[2];
+        // ================ YAW ROTATION ================
+        // Branch3 = 0 = Dont Rotate on Yaw, 1 = left, 2 = right
+        // Turn Left (-1) or Look straight        
+        float yaw = -actions.DiscreteActions[3] * rotationSpeed;        
+        // Turn Right
+        if (actions.DiscreteActions[3] == 2)
+        {
+            yaw = 1 * rotationSpeed;            
+        }
+
+        // ================ PITCH ROTATION ================
+        // Branch4 = 0 = Dont Rotate on Pitch, 1 = left, 2 = right
+        // Turn Left (-1) or Look straight        
+        float pitch = -actions.DiscreteActions[4] * rotationSpeed;
+        // Turn Right
+        if (actions.DiscreteActions[4] == 2)
+        {
+            pitch = 1 * rotationSpeed;
+        }
+
+        // Applying rotation
+        this.transform.Rotate(roll, yaw, pitch);        
 
         // Apply Force
-        rBody.AddForce(controlSignal * speed);
+        rBody.AddRelativeForce(controlSignal * speed);
 
         // Follow user
         float distanceToUser = Vector3.Distance(this.transform.localPosition, target.localPosition);
@@ -106,8 +137,8 @@ public class UAVAgent : Agent
             AddReward(-0.01f);
         }  
         
-        // If UAV Clipped very far down
-        if (this.transform.localPosition.y < -10f)
+        // If UAV Clipped very far down or very far up
+        if (this.transform.localPosition.y < -10f || this.transform.localPosition.y > 30f)
         {
             AddReward(-10);
             EndEpisode();
