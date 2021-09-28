@@ -53,11 +53,11 @@ public class UAVAgent : Agent
     {
         base.CollectObservations(sensor);
 
-        // Observe User Target and Agent Position as well as Agent Velocity
-        // TODO: Add Visual Sensors
+        // Observe User Target, Distance, and Agent Position
         sensor.AddObservation(target.localPosition);
         sensor.AddObservation(this.transform.localPosition);
-        sensor.AddObservation(rBody.velocity);
+        // sensor.AddObservation(rBody.velocity);
+        sensor.AddObservation(Vector3.Distance(this.transform.localPosition, target.localPosition));
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -184,7 +184,7 @@ public class UAVAgent : Agent
         // Penalty if not in radius
         else
         {
-            AddReward(-0.01f);
+            AddReward(-0.05f);
         }  
         
         // If UAV Clipped very far down or very far up

@@ -21,6 +21,10 @@ public class MeshGenerator : MonoBehaviour
     public int xSize = 100;
     public int zSize = 100;
     int layerMask;
+    bool instantiatedShape = false;
+    bool instantiatedMesh = false;
+    bool instantiatedTrees = false;
+    bool instantiatedNavMesh = false;
 
     void Start()
     {
@@ -33,6 +37,7 @@ public class MeshGenerator : MonoBehaviour
 
     public void CreateShape()
     {
+        if (instantiatedShape) return;
         int xSeed = Random.Range(-1000, 1000);
         int zSeed = Random.Range(-1000, 1000);
         vertices = new Vector3[(xSize + 1) * (zSize + 1)];
@@ -64,26 +69,32 @@ public class MeshGenerator : MonoBehaviour
                 tris += 6;
             }
             vert++;
-        }                
+        }
+        instantiatedShape = true;
     }
 
     public void UpdateMesh()
     {
+        if (instantiatedMesh) return;
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         meshCollider.sharedMesh = mesh;
 
         mesh.RecalculateNormals();
+        instantiatedMesh = true;
     }
 
     public void UpdateNavMesh()
     {
+        if (instantiatedNavMesh) return;
         surface.BuildNavMesh();
+        instantiatedNavMesh = true;
     }
 
     public void GenerateTrees()
     {
+        if (instantiatedTrees) return;
         countTrees = Random.Range(minTrees, maxTrees);
         float maxX = mesh.bounds.extents.x;
         float maxY = mesh.bounds.extents.y;        
@@ -94,19 +105,25 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int i = 0; i < treeObjects.Length; i++)
             {
-                Destroy(treeObjects[i]);
+                // Destroy(treeObjects[i]);
+                Vector3 spawnArea = CheckArea(maxX, maxY, maxZ);
+                treeObjects[i].transform.localPosition = spawnArea;
+                treeObjects[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 180), 0);
             }
         }
-
-        // Create Trees
-        treeObjects = new GameObject[countTrees];
-        for (int i = 0; i < countTrees; i++)
+        else
         {
-            Vector3 spawnArea = CheckArea(maxX, maxY, maxZ);
-            treeObjects[i] = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length - 1)], treeContainer.transform);
-            treeObjects[i].transform.localPosition = spawnArea;
-            treeObjects[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 180), 0);
-        }        
+            // Create Trees
+            treeObjects = new GameObject[countTrees];
+            for (int i = 0; i < countTrees; i++)
+            {
+                Vector3 spawnArea = CheckArea(maxX, maxY, maxZ);
+                treeObjects[i] = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length - 1)], treeContainer.transform);
+                treeObjects[i].transform.localPosition = spawnArea;
+                treeObjects[i].transform.rotation = Quaternion.Euler(0, Random.Range(0, 180), 0);
+            }
+        }
+        instantiatedTrees = true;
     }
 
     // Randomize Locations
