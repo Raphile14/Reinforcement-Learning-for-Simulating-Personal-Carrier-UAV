@@ -1211,7 +1211,6 @@ GameObject:
   - component: {fileID: 1744765861}
   - component: {fileID: 1744765862}
   - component: {fileID: 8042122910265579896}
-  - component: {fileID: 1744765863}
   - component: {fileID: 1768125828792505650}
   - component: {fileID: 8591904669266240416}
   m_Layer: 8
@@ -1229,7 +1228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744765860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1069006524}
@@ -1254,8 +1253,8 @@ MonoBehaviour:
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 0200000002000000030000000300000003000000
-    VectorActionSize: 0200000002000000030000000300000003000000
+      BranchSizes: 020000000300000003000000
+    VectorActionSize: 020000000300000003000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -1285,32 +1284,12 @@ MonoBehaviour:
   MaxStep: 1500
   target: {fileID: 8811389368965197597}
   moveTarget: {fileID: 1504541138908349679}
-  speed: 10
-  rotationSpeed: 0.5
+  speed: 5
+  rotationSpeed: 3
   userScript: {fileID: 188206887}
   meshGenerator: {fileID: 523467038}
   groundMarker: {fileID: 5255687642715886119}
   ongoing: 0
---- !u!114 &1744765863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744765860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282f342c2ab144bf38be65d4d0c4e07d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Camera: {fileID: 1877372967}
-  m_SensorName: ForwardCameraSensor
-  m_Width: 32
-  m_Height: 32
-  m_Grayscale: 1
-  m_ObservationType: 0
-  m_ObservationStacks: 5
-  m_Compression: 1
 --- !u!114 &1768125828792505650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,7 +1413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877372965}
   - component: {fileID: 1877372967}
-  - component: {fileID: 1877372966}
+  - component: {fileID: 1586022366100391911}
   m_Layer: 8
   m_Name: Forward
   m_TagString: Untagged
@@ -1499,14 +1478,26 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1877372966
-AudioListener:
+--- !u!114 &1586022366100391911
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877372964}
-  m_Enabled: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282f342c2ab144bf38be65d4d0c4e07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 1877372967}
+  m_SensorName: ForwardCameraSensor
+  m_Width: 64
+  m_Height: 64
+  m_Grayscale: 0
+  m_ObservationType: 0
+  m_ObservationStacks: 2
+  m_Compression: 1
 --- !u!1 &1885718132
 GameObject:
   m_ObjectHideFlags: 0

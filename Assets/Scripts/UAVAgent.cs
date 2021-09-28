@@ -42,7 +42,7 @@ public class UAVAgent : Agent
         userScript.RelocateMoveTarget();               
 
         // Reset Agent Location
-        this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, 0);
+        this.transform.localPosition = new Vector3(0, target.localPosition.y + 3f, -5);
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         // Set Status to true
@@ -77,6 +77,10 @@ public class UAVAgent : Agent
         {
             discreteActionsOut[0] = 1;
         }
+        if (Input.GetKey(KeyCode.S))
+        {
+            discreteActionsOut[0] = 2;
+        }
 
         // ================ UP/DOWN MOVEMENT ================
         // Up
@@ -109,11 +113,15 @@ public class UAVAgent : Agent
         Vector3 controlSignal = Vector3.zero;
 
         // ================ FORWARD MOVEMENT ================
-        // Branch0 (2) = dont move, or move forward
+        // Branch0 (2) = 0 = dont move, 1 = move forward, 2 = move backward
         // controlSignal.x = actions.DiscreteActions[0];
         if (actions.DiscreteActions[0] == 1)
         {
             controlSignal += transform.forward;
+        }
+        if (actions.DiscreteActions[0] == 2)
+        {
+            controlSignal += transform.forward * -1;
         }
 
         // ================ UP/DOWN MOVEMENT ================
