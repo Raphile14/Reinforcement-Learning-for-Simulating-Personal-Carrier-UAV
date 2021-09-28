@@ -63,7 +63,43 @@ public class UAVAgent : Agent
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         // base.Heuristic(actionsOut);
-        // Debug.Log("test");
+        var discreteActionsOut = actionsOut.DiscreteActions;
+
+        // Default
+        discreteActionsOut[0] = 0;
+        discreteActionsOut[1] = 0;
+        discreteActionsOut[2] = 0;
+        // discreteActionsOut[3] = 0;
+        // discreteActionsOut[4] = 0;
+
+        // ================ FORWARD MOVEMENT ================
+        if (Input.GetKey(KeyCode.W))
+        {
+            discreteActionsOut[0] = 1;
+        }
+
+        // ================ UP/DOWN MOVEMENT ================
+        // Up
+        if (Input.GetKey(KeyCode.Space))
+        {
+            discreteActionsOut[1] = 1;
+        }
+        // Down
+        if (Input.GetKey(KeyCode.C))
+        {
+            discreteActionsOut[1] = 2;
+        }
+
+        // ================ YAW ROTATION ================
+        if (Input.GetKey(KeyCode.A))
+        {
+            discreteActionsOut[2] = 1;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            discreteActionsOut[2] = 2;
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -77,52 +113,58 @@ public class UAVAgent : Agent
         // controlSignal.x = actions.DiscreteActions[0];
         if (actions.DiscreteActions[0] == 1)
         {
-            controlSignal += this.transform.forward;
+            controlSignal += transform.forward;
         }
 
         // ================ UP/DOWN MOVEMENT ================
-        // Branch1 (2) = 0 = don't fly, 1 = fly
+        // Branch1 (2) = 0 = don't fly, 1 = fly, 2 = fly down
         // controlSignal.y = actions.DiscreteActions[2];
         if (actions.DiscreteActions[1] == 1)
         {
-            controlSignal += this.transform.up;
+            controlSignal += transform.up;
+        }
+        if (actions.DiscreteActions[1] == 2)
+        {
+            controlSignal += transform.up * -1;
         }
 
-        // ================ ROLL ROTATION ================
-        // Branch2 = 0 = Dont Roll, 1 = left, 2 = right
-        // Turn Left (-1) or Look straight        
-        float roll = -actions.DiscreteActions[2] * rotationSpeed;
-        // Turn Right
-        if (actions.DiscreteActions[2] == 2)
-        {
-            roll = 1 * rotationSpeed;
-        }
+        //// ================ ROLL ROTATION ================
+        //// Branch2 = 0 = Dont Roll, 1 = left, 2 = right
+        //// Turn Left (-1) or Look straight        
+        //float roll = -actions.DiscreteActions[2] * rotationSpeed;
+        //// Turn Right
+        //if (actions.DiscreteActions[2] == 2)
+        //{
+        //    roll = 1 * rotationSpeed;
+        //}
 
         // ================ YAW ROTATION ================
         // Branch3 = 0 = Dont Rotate on Yaw, 1 = left, 2 = right
-        // Turn Left (-1) or Look straight        
-        float yaw = -actions.DiscreteActions[3] * rotationSpeed;        
+        // Turn Left (-1) or Look straight
+        // 3
+        float yaw = -actions.DiscreteActions[2] * rotationSpeed;
         // Turn Right
-        if (actions.DiscreteActions[3] == 2)
+        if (actions.DiscreteActions[2] == 2)
         {
             yaw = 1 * rotationSpeed;            
         }
 
-        // ================ PITCH ROTATION ================
-        // Branch4 = 0 = Dont Rotate on Pitch, 1 = left, 2 = right
-        // Turn Left (-1) or Look straight        
-        float pitch = -actions.DiscreteActions[4] * rotationSpeed;
-        // Turn Right
-        if (actions.DiscreteActions[4] == 2)
-        {
-            pitch = 1 * rotationSpeed;
-        }
+        //// ================ PITCH ROTATION ================
+        //// Branch4 = 0 = Dont Rotate on Pitch, 1 = left, 2 = right
+        //// Turn Left (-1) or Look straight        
+        //float pitch = -actions.DiscreteActions[4] * rotationSpeed;
+        //// Turn Right
+        //if (actions.DiscreteActions[4] == 2)
+        //{
+        //    pitch = 1 * rotationSpeed;
+        //}
 
         // Applying rotation
-        this.transform.Rotate(roll, yaw, pitch);        
+        // this.transform.Rotate(roll, yaw, pitch);
+        this.transform.Rotate(0, yaw, 0);
 
         // Apply Force
-        rBody.AddRelativeForce(controlSignal * speed);
+        rBody.MovePosition(transform.position + (controlSignal * speed * Time.deltaTime));
 
         // Follow user
         float distanceToUser = Vector3.Distance(this.transform.localPosition, target.localPosition);

@@ -130,6 +130,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1744765862, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744765862, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744765862, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744765862, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744765863, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_Width
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744765863, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_Height
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5891828930561531140, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
       propertyPath: m_Name
       value: UAVAgent
@@ -176,6 +200,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6777462772273721180, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042122910265579896, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042122910265579896, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: rotationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591904669266240416, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
