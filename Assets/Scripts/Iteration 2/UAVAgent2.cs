@@ -5,7 +5,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
-public class UAVAgent : Agent
+public class UAVAgent2 : Agent
 {
     Rigidbody rBody;
     public Transform target;
