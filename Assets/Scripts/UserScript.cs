@@ -10,7 +10,6 @@ public class UserScript : MonoBehaviour
     new Rigidbody rigidbody;
     NavMeshAgent agent;
     int layerMask;
-    Vector3 destination;
 
     // Animation
     public Animator animator;
