@@ -10,6 +10,7 @@ public class UserScript : MonoBehaviour
     new Rigidbody rigidbody;
     NavMeshAgent agent;
     int layerMask;
+    Vector3 destination;
 
     // Animation
     public Animator animator;
@@ -47,6 +48,7 @@ public class UserScript : MonoBehaviour
         if (Physics.Raycast(moveTarget.localPosition, moveTarget.TransformDirection(Vector3.down), out hit, 20f, layerMask))
         {
             agent.SetDestination(hit.point);
+            destination = hit.point;
             // Debug.Log("original hit: " + hit.point);
         }
         else
@@ -66,4 +68,17 @@ public class UserScript : MonoBehaviour
         // Debug.Log("reset location: " + this.transform.position);
         agent.enabled = true;
     }
+
+    //public void VerifyDestination()
+    //{
+    //    if (agent.enabled)
+    //    {
+    //        if (agent.destination.x != moveTarget.position.x && agent.destination.z != moveTarget.position.z)
+    //        {
+    //            Debug.Log("Destination incorrect, setting destination correctly");
+    //            // moveTarget.position = new Vector3(agent.destination.x, 10f, agent.destination.z);
+    //            agent.SetDestination(destination);
+    //        }
+    //    }
+    //}
 }

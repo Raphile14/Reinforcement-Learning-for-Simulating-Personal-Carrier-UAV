@@ -133,6 +133,17 @@ public class MeshGenerator : MonoBehaviour
         float xCoord = Random.Range(-maxX, maxX);
         float zCoord = Random.Range(-maxZ, maxZ);
 
+        if (xCoord < 10 && xCoord > -10)
+        {
+            if (xCoord >= 0 && xCoord < 10) xCoord += 10;
+            else xCoord -= 10;
+        }
+        if (zCoord < 10 && zCoord > -10)
+        {
+            if (zCoord >= 0 && zCoord < 10) zCoord += 10;
+            else zCoord -= 10;
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(new Vector3(xCoord, maxY, zCoord), Vector3.down, out hit, 20f, layerMask))
         {

@@ -201,6 +201,9 @@ public class UAVAgent : Agent
         {
             EndEpisode();
         }
+
+        // Check if human destination is correct
+        //userScript.VerifyDestination();
     }
 
     private void OnCollisionEnter(Collision collision)
