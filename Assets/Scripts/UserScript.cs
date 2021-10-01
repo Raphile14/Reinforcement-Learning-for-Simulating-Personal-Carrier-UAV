@@ -47,7 +47,7 @@ public class UserScript : MonoBehaviour
         if (Physics.Raycast(moveTarget.localPosition, moveTarget.TransformDirection(Vector3.down), out hit, 20f, layerMask))
         {
             agent.SetDestination(hit.point);
-            destination = hit.point;
+            // destination = hit.point;
             // Debug.Log("original hit: " + hit.point);
         }
         else
