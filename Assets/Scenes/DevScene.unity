@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1744765862, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: ad7a1d0cecb99a14f8699c5d6a525611, type: 3}
     - target: {fileID: 5891828930561531140, guid: 3ce2ca1e3abe03d409603db4766f6043, type: 3}
       propertyPath: m_Name
       value: UAVAgent
