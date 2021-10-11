@@ -197,7 +197,9 @@ public class UAVAgent : Agent
         // Move target and human target
         // End episode if human is near target or reached corner
         float distance = target.position.x - moveTarget.position.x;
-        if ((distance < 1f && distance > -1f) || target.localPosition.x > 45 || target.localPosition.x < -45 || target.localPosition.z > 45 || target.localPosition.x < 45)
+        if ((distance < 1f && distance > -1f) || 
+            (target.localPosition.x > 45 && target.localPosition.z > 45 || target.localPosition.x < -45) || 
+            (target.localPosition.x < -45 && target.localPosition.z > 45 || target.localPosition.x < -45))
         {
             EndEpisode();
         }

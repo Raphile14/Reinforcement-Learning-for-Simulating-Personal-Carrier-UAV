@@ -19,6 +19,7 @@ public class UserScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         layerMask = LayerMask.GetMask("GroundMesh");
+        TurnOffUser();
     }
     
     void FixedUpdate()
@@ -60,11 +61,20 @@ public class UserScript : MonoBehaviour
 
     public void ResetUser()
     {
-        agent.enabled = false;
         RaycastHit hit;
         Physics.Raycast(spawnTarget.localPosition, spawnTarget.TransformDirection(Vector3.down), out hit, 20f, layerMask);
         this.transform.localPosition = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
         // Debug.Log("reset location: " + this.transform.position);
+        TurnOnUser();
+    }
+
+    public void TurnOffUser()
+    {
+        agent.enabled = false;
+    }
+
+    public void TurnOnUser()
+    {
         agent.enabled = true;
     }
 
